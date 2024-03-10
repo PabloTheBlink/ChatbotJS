@@ -24,6 +24,7 @@ const chatbot = Component({
     };
     this.init = function () {
       this.showInfoModal();
+      sendMessage("hola", true);
     };
     this.openChatbot = function () {
       this.collapsed = false;
@@ -33,20 +34,19 @@ const chatbot = Component({
       this.collapsed = true;
       this.apply();
     };
-    this.sendMessage = function (e) {
-      e.preventDefault();
-      if (this.message == "") return;
-      this.messages.push({
-        from: 1,
-        content: this.message,
-      });
-      const m = this.message;
-      this.message = "";
+    const sendMessage = (message, auto = false) => {
+      if (message == "") return;
+      if (!auto) {
+        this.messages.push({
+          from: 1,
+          content: message,
+        });
+      }
       this.fetching = true;
       this.apply();
       fetch(API_URL, {
         method: "POST",
-        body: JSON.stringify({ content: m }),
+        body: JSON.stringify({ content: message }),
       })
         .then((r) => r.json())
         .then((r) => {
@@ -57,6 +57,12 @@ const chatbot = Component({
           this.fetching = false;
           this.apply();
         });
+    };
+    this.sendMessage = function (e) {
+      e.preventDefault();
+      sendMessage(this.message);
+      this.message = "";
+      this.apply();
     };
     setTimeout(this.init.bind(this));
   },
