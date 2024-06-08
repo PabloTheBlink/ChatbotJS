@@ -4,7 +4,9 @@ const TIME_INFO_MODAL = 1000 * 10;
 const OPENED_BY_DEFAULT = false;
 const API_URL = "https://api.devetty.es/chatbot";
 
-const chatbot = Component({
+const chatbot = document.createElement("div");
+
+Component({
   controller: function () {
     this.collapsed = !OPENED_BY_DEFAULT;
     this.show_info_modal = false;
@@ -103,6 +105,6 @@ const chatbot = Component({
     const input = document.querySelector(".devetty-chatbot-container .devetty-chatbot-window .devetty-chatbot-form input");
     if (input) input.focus();
   },
-}).render();
+}).render(chatbot);
 
-document.body.appendChild(chatbot.DOM_element);
+document.body.appendChild(chatbot);
