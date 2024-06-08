@@ -11,6 +11,7 @@ Añade un chatbot a tu web con dos lineas de código
 
 ## TODO
 
+- [ ] Utilizar LLama directamente desde el cliente
 - [ ] Hacer parametrizables las constantes
 - [ ] Hacer parametrizable la dirección de la API
 - [ ] Hacer parametrizable el logo y colores
